@@ -42,7 +42,7 @@ const createForm = () => {
     };
     cardCreated(students.push(obj));
   }
-  document.querySelector('#sort1').reset
+  //document.querySelector('#sort1').reset
   };
   
   
