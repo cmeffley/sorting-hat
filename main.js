@@ -1,34 +1,11 @@
 //console.log('Connected');
 const hat = [
-  {
-    name: 'Chris',
-    house: 'Gryffindor',
-    values: ['bravery ', 'daring ', 'nerve ', 'chivarly'],
-    animal: 'Lion',
-    colors: 'Scarlet and Gold',
-  },
-  {
-    name: 'Jackson',
-    house: 'Hufflepuff',
-    values: ['hard work ', 'dedication ', 'patience ', 'loyalty ', 'fair play'],
-    animal: 'Badger',
-    colors: 'Yellow and Black',
-  },
-  {
-    name: 'Eliza',
-    house: 'Ravenclaw',
-    values: ['intelligence ', 'knowledge ', 'curiosity ', 'creativity ', 'wit'],
-    animal: 'Eagle',
-    colors: 'Blue and Bronze',
-  },
-  {
-    name: 'Kacie',
-    house: 'Slytherin',
-    values: ['ambition ', 'leadership ', 'self-preservation ', 'cunning ', 'resourcefulness'],
-    animal: 'Serpent',
-    colors: 'Emerald Green and Silver', 
-  }
+  'Gryffindor',
+  'Hufflepuff',
+  'Ravenclaw',
+  'Slytherin', 
 ];
+const students = [];
 
 const printToDom = (divId, textToPrint) => {
   const selectDiv = document.querySelector(divId);
@@ -44,37 +21,47 @@ const createForm = () => {
     <button type="submit" class="btn btn-info" id="sort1">Sort!</button>
     </form>`
     printToDom('#form', form);
-    document.querySelector('#sort1').addEventListener('click', cardCreated);
+    document.querySelector('#sort1').addEventListener('click', formInfo);
     
   };
 
+  const formInfo = (e) => {
+    e.preventDefault();  
+    
+  
+    const name = document.querySelector('#student').value;
+    const house = hat[Math.floor(Math.random() * hat.length)];
+    
+  if (name === ``) {
+    alert('Please add name')
+  } else {
+    const obj = {
+      name,
+      house, 
+      
+    };
+    cardCreated(students.push(obj));
+  }
+  document.querySelector('#sort1').reset
+  };
+  
   
   
   function cardCreated() {
     let domString = '';
-    hat.forEach((element, i) => {
+    students.forEach((element, i) => {
       domString += `<div class="card mb-3" style="width: 18rem;" id=${i}>      
         <div class="card-body">
           <p class="card-text">${element.name}</p>
-          <p class="card-text">${element.values}</p>
-          <p class="card-text">${element.animal}</p>
-          <p class="card-text">${element.colors}</p>
+          <p class="card-text">${element.house}</p>
           <button type="button" class="btn btn-danger" id="${i}">Expel!</button>
         </div>
         </div>`
     });
     printToDom('#hats', domString);
     
-  }
+  };
 
-
-const formInfo = (e) => {
-  e.preventDefault();  
-
-  const name = document.querySelector('#student').value;
-
-  const newHouse = Math.floor(Math.random() * hats.length);
-  const house = hats[newhats];
 
 
 
@@ -91,6 +78,7 @@ const useButton = (e) => {
 
 const init = () => {
   useButton();
+
 };
 
 init();
