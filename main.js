@@ -28,9 +28,10 @@ const createForm = () => {
   const formInfo = (e) => {
     e.preventDefault();  
     
-  
     const name = document.querySelector('#student').value;
     const house = hat[Math.floor(Math.random() * hat.length)];
+    const studentIds = students.map(student => student.id).sort((a, b) => a - b);
+    const id = studentIds.length ? studentIds[(studentIds.length - 1)] + 1 : 1;
     
   if (name === ``) {
     alert('Please add name')
@@ -38,42 +39,44 @@ const createForm = () => {
     const obj = {
       name,
       house, 
-      
-    };
-    cardCreated(students.push(obj));
+      id,
+    }; 
+    students.push(obj);
+    cardCreated();
   }
-  document.querySelector('#sort1').reset
+    document.querySelector('form').reset();
   };
-  
-  
   
   function cardCreated() {
     let domString = '';
-    students.forEach((element, i) => {
-      domString += `<div class="card mb-3" style="width: 18rem;" id=${i}>      
+    students.forEach((element) => {
+      domString += `<div class="card mb-3" style="width: 18rem;" id=${element.id}>      
         <div class="card-body">
           <p class="card-text">${element.name}</p>
           <p class="card-text">${element.house}</p>
-          <button type="button" class="btn btn-danger" id="${i}">Expel!</button>
+          <button type="button" class="btn btn-danger" id=${element.id}>Expel!</button>
         </div>
         </div>`
     });
     printToDom('#hats', domString);
-    
+
   };
 
+ const expelStudent = (e) => {
+    const targetType = e.target.type;
+    const targetId = e.target.id;
+if (targetType === 'button') {
+    const studentIndex = students.findIndex(student => student.id === targetId);
+    students.splice(studentIndex, 1);
+ }
+ 
+ cardCreated();
+}
 
-
-
-
-
-
-
-
-const useButton = (e) => {
+const useButton = () => {
 
   document.querySelector('#start-sort').addEventListener('click', createForm);  
-  
+  document.querySelector('#hats').addEventListener('click', expelStudent);
 };
 
 const init = () => {
