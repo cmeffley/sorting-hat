@@ -6,22 +6,26 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
   <link rel="stylesheet" href="main.css">
   <title>Sorting Hat</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap" rel="stylesheet">
 </head>
 <body>
   <div class="jumbotron">
     <h1 class="display-4 text-center">Welcome to Hogwarts!</h1>
-    <p class="lead text-center">The time has come! You will be placed in your new house and forever become the wizard you're destined to be!</p>
+    <h3 class="lead text-center">The time has come! You will be placed in your new house and forever become the wizard you're destined to be!</h3>
     <hr class="my-4">
-    <p class="text-center">Click below and discover which house your heart and powers lie</p>
+    <h5 class="text-center" style="color: whitesmoke;">Click below and discover which house your heart and powers lie</h5>
     <p class="lead text-center">
-      <a class="btn btn-primary btn-lg" href="#" role="button" id="start-sort">Let's Sort</a>
+      <a class="btn btn-dark btn-lg" href="#" role="button" id="start-sort">Let's Sort</a>
     </p>
   </div>
 
   
   <div id="form" class="d-flex justify-content-center" style="margin-top: 3em; margin-bottom: 3em;"></div>
 
-  <div id="hats" class="d-flex flex-wrap justify-content-around"></div>
+  <div id="hats" class="d-flex flex-wrap justify-content-around">
+    <div id="hat-color" class="justify-content-end"></div>
+  </div>
     
   
 
