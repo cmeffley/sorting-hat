@@ -13,17 +13,17 @@ const printToDom = (divId, textToPrint) => {
 };
 
 const createForm = () => {
-  let form = `<form>
+  let form = `<form class="text-center">
     <div class="mb-3">
-    <label for="student" class="form-label">Student</label>
+    <label for="student" class="form-label" style="color: whitesmoke">ENTER FIRST YEAR'S NAME</label>
     <input type="text" class="form-control" id="student" required>
     </div>
-    <button type="submit" class="btn btn-info" id="sort1">Sort!</button>
+    <button type="submit" class="btn btn-light" id="sort1">Sort!</button>
     </form>`
     printToDom('#form', form);
     document.querySelector('#sort1').addEventListener('click', formInfo);
-    
-  };
+  
+ };
 
   const formInfo = (e) => {
     e.preventDefault();  
@@ -41,26 +41,28 @@ const createForm = () => {
       house, 
       id,
     }; 
+    console.log(e, house);
     students.push(obj);
     cardCreated();
   }
-    document.querySelector('form').reset();
-  };
   
+    document.querySelector('form').reset();
+};
+
+
   function cardCreated() {
     let domString = '';
     students.forEach((element) => {
       domString += `<div class="card mb-3" style="width: 18rem;" id=${element.id}>      
-        <div class="card-body">
-          <p class="card-text">${element.name}</p>
-          <p class="card-text">${element.house}</p>
+        <div class="card-body text-center">
+          <h2 class="card-text">${element.name}</h2>
+          <h5 class="card-text">${element.house}</h5>
           <button type="button" class="btn btn-danger" id=${element.id}>Expel!</button>
         </div>
         </div>`
     });
     printToDom('#hats', domString);
-
-  };
+ };
 
  const expelStudent = (e) => {
     const targetType = e.target.type;
@@ -73,10 +75,28 @@ if (targetType === 'button') {
  cardCreated();
 }
 
+// const colorOfCard = () => {
+//   const buttonId = hat;
+
+//   if (buttonId === 'Gryffindor') {
+//     document.querySelector('#hat-color').style.backgroundColor = 'gold';
+//   } else if (buttonId === 'Hufflepuff') {
+//     document.querySelector('#hat-color').style.backgroundColor = 'yellow';
+//   } else if (buttonId === 'Ravenclaw') {
+//     document.querySelector('#hat-color').style.backgroundColor = 'blue';
+//   } else if (buttonId === 'Slytherin') {
+//     document.querySelector('#hat-color').style.backgroundColor = 'silver';
+//   }
+// };
+
+
+
+
 const useButton = () => {
 
   document.querySelector('#start-sort').addEventListener('click', createForm);  
   document.querySelector('#hats').addEventListener('click', expelStudent);
+  //document.querySelector('#hat-color').addEventListener('click', colorOfCard);
 };
 
 const init = () => {
