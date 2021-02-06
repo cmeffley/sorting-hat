@@ -1,10 +1,4 @@
-//console.log('Connected');
-const hat = [
-  'Gryffindor',
-  'Hufflepuff',
-  'Ravenclaw',
-  'Slytherin', 
-];
+const hat = ["Gryffindor", "Hufflepuff", "Ravenclaw", "Slytherin"];
 const students = [];
 
 const printToDom = (divId, textToPrint) => {
@@ -19,89 +13,71 @@ const createForm = () => {
     <input type="text" class="form-control" id="student" required>
     </div>
     <button type="submit" class="btn btn-light" id="sort1">Sort!</button>
-    </form>`
-    printToDom('#form', form);
-    document.querySelector('#sort1').addEventListener('click', formInfo);
-  
- };
+    </form>`;
+  printToDom("#form", form);
+  document.querySelector("#sort1").addEventListener("click", formInfo);
+};
 
-  const formInfo = (e) => {
-    e.preventDefault();  
-    
-    const name = document.querySelector('#student').value;
-    const house = hat[Math.floor(Math.random() * hat.length)];
-    const studentIds = students.map(student => student.id).sort((a, b) => a - b);
-    const id = studentIds.length ? studentIds[(studentIds.length - 1)] + 1 : 1;
-    
+const formInfo = (e) => {
+  e.preventDefault();
+
+  const name = document.querySelector("#student").value;
+  const house = hat[Math.floor(Math.random() * hat.length)];
+  const studentIds = students
+    .map((student) => student.id)
+    .sort((a, b) => a - b);
+  const id = studentIds.length ? studentIds[studentIds.length - 1] + 1 : 1;
+
   if (name === ``) {
-    alert('Please add name')
+    alert("Please add name");
   } else {
     const obj = {
       name,
-      house, 
+      house,
       id,
-    }; 
-    console.log(e, house);
+    };
+
     students.push(obj);
     cardCreated();
   }
-  
-    document.querySelector('form').reset();
+
+  document.querySelector("form").reset();
 };
 
-
-  function cardCreated() {
-    let domString = '';
-    students.forEach((element) => {
-      domString += `<div class="card mb-3" style="width: 18rem;" id=${element.id}>      
+function cardCreated() {
+  let domString = "";
+  students.forEach((element) => {
+    domString += `<div class="card mb-3" style="width: 18rem;" id=${element.id}>      
         <div class="card-body text-center">
           <h2 class="card-text">${element.name}</h2>
           <h5 class="card-text">${element.house}</h5>
           <button type="button" class="btn btn-danger" id=${element.id}>Expel!</button>
         </div>
-        </div>`
-    });
-    printToDom('#hats', domString);
- };
-
- const expelStudent = (e) => {
-    const targetType = e.target.type;
-    const targetId = e.target.id;
-if (targetType === 'button') {
-    const studentIndex = students.findIndex(student => student.id === targetId);
-    students.splice(studentIndex, 1);
- }
- 
- cardCreated();
+        </div>`;
+  });
+  printToDom("#hats", domString);
 }
 
-// const colorOfCard = () => {
-//   const buttonId = hat;
+const expelStudent = (e) => {
+  const targetType = e.target.type;
+  const targetId = Number(e.target.id);
+  if (targetType === "button") {
+    const studentIndex = students.findIndex(
+      (student) => student.id === targetId
+    );
+    students.splice(studentIndex, 1);
+  }
 
-//   if (buttonId === 'Gryffindor') {
-//     document.querySelector('#hat-color').style.backgroundColor = 'gold';
-//   } else if (buttonId === 'Hufflepuff') {
-//     document.querySelector('#hat-color').style.backgroundColor = 'yellow';
-//   } else if (buttonId === 'Ravenclaw') {
-//     document.querySelector('#hat-color').style.backgroundColor = 'blue';
-//   } else if (buttonId === 'Slytherin') {
-//     document.querySelector('#hat-color').style.backgroundColor = 'silver';
-//   }
-// };
-
-
-
+  cardCreated();
+};
 
 const useButton = () => {
-
-  document.querySelector('#start-sort').addEventListener('click', createForm);  
-  document.querySelector('#hats').addEventListener('click', expelStudent);
-  //document.querySelector('#hat-color').addEventListener('click', colorOfCard);
+  document.querySelector("#start-sort").addEventListener("click", createForm);
+  document.querySelector("#hats").addEventListener("click", expelStudent);
 };
 
 const init = () => {
   useButton();
-
 };
 
 init();
