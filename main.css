@@ -6,4 +6,9 @@ body {
   fixed
   center 
   #cc6262
-};
+}
+
+ .card-img-top {
+  height: 175px;
+  object-fit: scale-down;
+}

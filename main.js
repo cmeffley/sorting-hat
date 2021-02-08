@@ -1,6 +1,11 @@
 const hat = ["Gryffindor", "Hufflepuff", "Ravenclaw", "Slytherin"];
 const students = [];
 
+const gryff = "https://images-na.ssl-images-amazon.com/images/I/61y4iV2FaVL._AC_SY741_.jpg";
+const huff = "https://m.media-amazon.com/images/I/61Bpauebd4L._AC_SY879_.jpg";
+const raven = "https://images-na.ssl-images-amazon.com/images/I/61eu9agxwbL._AC_SL1031_.jpg";
+const sly = "https://images-na.ssl-images-amazon.com/images/I/61M7XjS3GqL._AC_SY741_.jpg";
+
 const printToDom = (divId, textToPrint) => {
   const selectDiv = document.querySelector(divId);
   selectDiv.innerHTML = textToPrint;
@@ -23,6 +28,7 @@ const formInfo = (e) => {
 
   const name = document.querySelector("#student").value;
   const house = hat[Math.floor(Math.random() * hat.length)];
+  const crest = '';
   const studentIds = students
     .map((student) => student.id)
     .sort((a, b) => a - b);
@@ -34,8 +40,20 @@ const formInfo = (e) => {
     const obj = {
       name,
       house,
+      crest,
       id,
     };
+
+    if (house === 'Gryffindor') {
+      obj.crest = gryff;
+      } else if (house === 'Hufflepuff') {
+      obj.crest = huff;
+      } else if (house === 'Ravenclaw') {
+      obj.crest = raven;
+      } else if (house === 'Slytherin') {
+      obj.crest = sly;
+      }
+
 
     students.push(obj);
     cardCreated();
@@ -47,10 +65,11 @@ const formInfo = (e) => {
 function cardCreated() {
   let domString = "";
   students.forEach((element) => {
-    domString += `<div class="card mb-3" style="width: 18rem;" id=${element.id}>      
-        <div class="card-body text-center">
+    domString += `<div class="card mb-3" style="width: 18rem;" id=${element.id}>
+          <div class="card-body text-center">
           <h2 class="card-text">${element.name}</h2>
           <h5 class="card-text">${element.house}</h5>
+          <img class="card-img-top" src="${element.crest}" alt="House Crest">
           <button type="button" class="btn btn-danger" id=${element.id}>Expel!</button>
         </div>
         </div>`;
